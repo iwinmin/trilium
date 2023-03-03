@@ -14,9 +14,11 @@ class BasicWidget extends Component {
     }
 
     child(...components) {
-        if (!components) {
+        if (!components || components.length === 0) {
             return this;
         }
+
+        components = components.map(clazz => (typeof clazz === 'function') ? new clazz() : clazz);
 
         super.child(...components);
 
